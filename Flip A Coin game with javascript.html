@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Design by foolishdeveloper.com -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3pati</title>
+ <link rel="icon" type="https://i.postimg.cc/05fNXbFW/Screenshot-2024-09-06-121934.png">
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+  <style media="screen">
+    *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Rubik",sans-serif;
+}
+body{
+    height: 100%;
+    background: #1f5a82;
+}
+.container{
+    background-color: #ffffff;
+    width: 400px;
+    padding: 35px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    box-shadow: 15px 30px 35px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    -webkit-perspective: 300px;
+    perspective: 300px;
+}
+.stats{
+    display: flex;
+    color: #101020;
+    font-weight: 500;
+    padding: 20px;
+    margin-bottom: 40px;
+    margin-top: 55px;
+    box-shadow: 0 0 20px rgba(0,139,253,0.25);
+
+}
+.stats p:nth-last-child(1){
+  margin-left: 50%;
+}
+.coin{
+    height: 150px;
+    width: 150px;
+    position: relative;
+    margin: 32px auto;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+}
+.coin img{
+    width: 145px;
+}
+.BaBa, .Masjid{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+}
+.Masjid{
+    transform: rotateX(180deg);
+}
+@keyframes spin-BaBa{
+    0%{
+        transform: rotateX(0);
+    }
+    100%{
+        transform: rotateX(1980deg);
+    }
+}
+@keyframes spin-Masjid{
+    0%{
+        transform: rotateX(0);
+    }
+    100%{
+        transform: rotateX(2160deg);
+    }
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+button{
+    width: 150px;
+    padding: 15px 0;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#flip-button{
+    background-color: #053469;
+    color: #ffffff;
+}
+#flip-button:disabled{
+    background-color: #e1e0ee;
+    border-color: #e1e0ee;
+    color: #101020;
+}
+#reset-button{
+    background-color: #674706;
+    color: white;
+}
+  </style>
+</head>
+<body>
+</script>
+<script language="javascript">
+document.onmousedown=disableclick;
+status="Right Click Disabled";
+function disableclick(event)
+{
+if(event.button==2)
+{
+alert(status);
+return false;    
+}
+}
+</script>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="coin" id="coin">
+            <div class="BaBa">
+                <img src="https://i.postimg.cc/NMP9Rbsc/download.jpg">
+            </div>
+            <div class="Masjid">
+                <img src="https://i.postimg.cc/mrzkymCT/download-1.jpg">
+            </div>
+        </div>
+         <div class="stats">
+             <p id="BaBa-count">BABA: 0</p>
+             <p id="Masjid-count">Masjid: 0</p>
+         </div>
+        <div class="buttons">
+            <button id="flip-button">
+                Flip Coin
+            </button>
+            <button id="reset-button">
+                Reset
+            </button>
+        </div>
+    </div>
+    <!--Script-->
+  <script type="text/javascript">
+let BaBa = 0;
+let Masjid = 0;
+let coin = document.querySelector(".coin");
+let flipBtn = document.querySelector("#flip-button");
+let resetBtn = document.querySelector("#reset-button");
+
+flipBtn.addEventListener("click", () => {
+    let i = Math.floor(Math.random() * 2);
+    coin.style.animation = "none";
+    if(i){
+        setTimeout(function(){
+            coin.style.animation = "spin-BaBa 3s forwards";
+        }, 100);
+        BaBa++;
+    }
+    else{
+        setTimeout(function(){
+            coin.style.animation = "spin-Masjid 3s forwards";
+        }, 100);
+        Masjid++;
+    }
+    setTimeout(updateStats, 3000);
+    disableButton();
+});
+function updateStats(){
+    document.querySelector("#BaBa-count").textContent = `BaBa: ${BaBa}`;
+    document.querySelector("#Masjid-count").textContent = `Masjid: ${Masjid}`;
+}
+function disableButton(){
+    flipBtn.disabled = true;
+    setTimeout(function(){
+        flipBtn.disabled = false;
+    },3000);
+}
+resetBtn.addEventListener("click",() => {
+    coin.style.animation = "none";
+    BaBa = 0;
+    Masjid = 0;
+    updateStats();
+});
+  </script>
+</body>
+</html>
